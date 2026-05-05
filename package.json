@@ -1,0 +1,36 @@
+{
+  "name": "tedge-flows-workspace",
+  "version": "1.0.0",
+  "description": "Experimental repository to exchange examples which use the upcoming tedge-flows feature",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "format": "npx prettier . --write --trailing-comma all --ignore-path .prettierignore",
+    "format:check": "npx prettier . --check --trailing-comma all --ignore-path .prettierignore",
+    "test": "jest --coverageProvider=v8 --coverage",
+    "build-all": "npm --workspaces run build",
+    "update-deps": "npx npm-check-updates -u --workspaces",
+    "publish": "node ./scripts/publish-images.js",
+    "generate-flow": "node ./scripts/create-flow.js",
+    "deploy-local": "node ./scripts/deploy-local.js"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "flows/*"
+  ],
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.11.0"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.65.0",
+    "@bufbuild/protoc-gen-es": "^2.11.0",
+    "@types/jest": "^30.0.0",
+    "esbuild": "^0.25.5",
+    "esbuild-register": "^3.6.0",
+    "jest": "^30.0.4",
+    "jest-esbuild": "^0.4.0",
+    "prettier": "3.6.2",
+    "typescript": "^5.8.3"
+  }
+}

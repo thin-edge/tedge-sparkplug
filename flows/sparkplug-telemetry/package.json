@@ -1,0 +1,18 @@
+{
+  "name": "sparkplug-telemetry",
+  "version": "0.0.2",
+  "description": "Flow converts Sparkplug B DDATA/NDATA messages to thin-edge.io measurement format",
+  "source": "src/main.ts",
+  "module": "lib/main.js",
+  "type": "module",
+  "scripts": {
+    "prebuild": "npx buf generate",
+    "build": "esbuild src/main.ts --target=es2020 --bundle --outfile=lib/main.js --format=esm",
+    "test": "jest --coverageProvider=v8 --coverage"
+  },
+  "tedge": {
+    "mapper": "c8y"
+  },
+  "author": "thin-edge.io",
+  "license": "Apache-2.0"
+}
