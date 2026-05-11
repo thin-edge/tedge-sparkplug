@@ -1,6 +1,6 @@
 {
-  "flows/sparkplug-publisher": "0.1.0",
-  "flows/sparkplug-telemetry": "0.1.0",
-  "tools/spdevice": "0.1.0",
-  "tools/spmon": "0.1.0"
+  "flows/sparkplug-publisher": "0.1.1",
+  "flows/sparkplug-telemetry": "0.1.1",
+  "tools/spdevice": "0.1.1",
+  "tools/spmon": "0.1.1"
 }
