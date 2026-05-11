@@ -45,8 +45,8 @@ builds:
 
 archives:
   - ids:
-    - spmon
-    - spdevice
+      - spmon
+      - spdevice
     formats: [tar.gz]
     # this name template makes the OS and Arch compatible with the results of `uname`.
     name_template: >-
@@ -63,8 +63,7 @@ archives:
 
 nfpms:
   # note that this is an array of nfpm configs
-  -
-    id: spdevice
+  - id: spdevice
     ids:
       - spdevice
     release: "1"
@@ -76,8 +75,7 @@ nfpms:
       - rpm
     package_name: spdevice
 
-  -
-    id: spmon
+  - id: spmon
     ids:
       - spmon
     release: "1"
