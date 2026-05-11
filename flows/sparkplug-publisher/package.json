@@ -1,6 +1,6 @@
 {
   "name": "sparkplug-publisher",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Flow converts thin-edge.io measurements to Sparkplug B DDATA/NDATA protobuf messages",
   "source": "src/main.ts",
   "module": "lib/main.js",
