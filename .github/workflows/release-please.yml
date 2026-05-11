@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
+      sparkplug-publisher--tag_name: ${{ steps.release.outputs['sparkplug-publisher--tag_name'] }}
+      sparkplug-telemetry--tag_name: ${{ steps.release.outputs['sparkplug-telemetry--tag_name'] }}
+      spdevice--tag_name: ${{ steps.release.outputs['spdevice--tag_name'] }}
+      spmon--tag_name: ${{ steps.release.outputs['spmon--tag_name'] }}
     steps:
       - uses: googleapis/release-please-action@v4
         id: release
@@ -39,6 +43,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Use Node.js 24.x
         uses: actions/setup-node@v6
@@ -91,3 +97,43 @@ jobs:
         with:
           name: flows
           path: ./dist/*.tar.gz
+
+      - name: Build spdevice
+        if: needs.release-please.outputs['spdevice--tag_name'] != ''
+        uses: goreleaser/goreleaser-action@v7
+        with:
+          version: "~> v2"
+          args: release --config .goreleaser-spdevice.yaml --skip=publish --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_CURRENT_TAG: ${{ needs.release-please.outputs['spdevice--tag_name'] }}
+
+      - name: Upload spdevice artifacts to GitHub Release
+        if: needs.release-please.outputs['spdevice--tag_name'] != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.release-please.outputs['spdevice--tag_name'] }}
+        run: |
+          for artifact in dist_spdevice/*.tar.gz dist_spdevice/*.zip dist_spdevice/*.deb dist_spdevice/*.rpm dist_spdevice/*.apk; do
+            [[ -f "$artifact" ]] && gh release upload "$TAG" "$artifact" --clobber
+          done
+
+      - name: Build spmon
+        if: needs.release-please.outputs['spmon--tag_name'] != ''
+        uses: goreleaser/goreleaser-action@v7
+        with:
+          version: "~> v2"
+          args: release --config .goreleaser-spmon.yaml --skip=publish --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GORELEASER_CURRENT_TAG: ${{ needs.release-please.outputs['spmon--tag_name'] }}
+
+      - name: Upload spmon artifacts to GitHub Release
+        if: needs.release-please.outputs['spmon--tag_name'] != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.release-please.outputs['spmon--tag_name'] }}
+        run: |
+          for artifact in dist_spmon/*.tar.gz dist_spmon/*.zip dist_spmon/*.deb dist_spmon/*.rpm dist_spmon/*.apk; do
+            [[ -f "$artifact" ]] && gh release upload "$TAG" "$artifact" --clobber
+          done

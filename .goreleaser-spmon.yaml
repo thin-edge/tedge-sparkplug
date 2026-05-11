@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
+project_name: spmon
+dist: dist_spmon/
+
+before:
+  hooks:
+    - cd tools/spmon && go mod tidy
+
+builds:
+  - id: spmon
+    dir: tools/spmon
+    main: ./...
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - arm64
+      - amd64
+      - "386"
+
+archives:
+  - ids:
+      - spmon
+    formats: [tar.gz]
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+nfpms:
+  - id: spmon
+    ids:
+      - spmon
+    release: "1"
+    maintainer: thin-edge.io <info@thin-edge.io>
+    file_name_template: "{{ .ConventionalFileName }}"
+    formats:
+      - deb
+      - apk
+      - rpm
+    package_name: spmon
