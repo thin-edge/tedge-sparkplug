@@ -37,6 +37,9 @@ archives:
       - goos: windows
         formats: [zip]
 
+release:
+  mode: keep-existing
+
 nfpms:
   - id: spdevice
     ids:
