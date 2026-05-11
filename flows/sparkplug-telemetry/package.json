@@ -1,6 +1,6 @@
 {
   "name": "sparkplug-telemetry",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Flow converts Sparkplug B DDATA/NDATA messages to thin-edge.io measurement format",
   "source": "src/main.ts",
   "module": "lib/main.js",

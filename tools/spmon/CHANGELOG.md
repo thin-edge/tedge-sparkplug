@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/thin-edge/tedge-sparkplug/compare/spmon-v0.1.0...spmon-v0.1.1) (2026-05-11)
+
+
+### Miscellaneous Chores
+
+* release 0.1.1 ([de861ca](https://github.com/thin-edge/tedge-sparkplug/commit/de861cad098cedb4043cb8a579f61d1eca87d299))
+
 ## [0.1.0](https://github.com/thin-edge/tedge-sparkplug/compare/spmon-v0.0.1...spmon-v0.1.0) (2026-05-11)
 
 
