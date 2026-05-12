@@ -90,14 +90,13 @@ tedge mqtt pub --retain te/device/press01///a/LowCoolant \
 ### Expected Sparkplug B output
 
 Because the payloads are binary protobuf you won't see human-readable output
-from `tedge mqtt sub`. Use [spmon](../../tools/spmon) to inspect them:
+from `tedge mqtt sub`. Use [sparkplug-monitor](https://github.com/thin-edge/sparkplug-monitor) to inspect them:
 
 ```sh
-cd tools/spmon
-./spmon --broker localhost --group tedge --node gateway01
+spmonitor --broker localhost --group tedge --node gateway01
 ```
 
-Press `R` inside spmon to send a Sparkplug B NCMD rebirth command to the flow,
+Press `R` inside spmonitor to send a Sparkplug B NCMD rebirth command to the flow,
 which will immediately re-publish retained BIRTH messages for every known device
 with their current last-known metric values.
 

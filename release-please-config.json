@@ -7,14 +7,6 @@
     },
     "flows/sparkplug-telemetry": {
       "component": "sparkplug-telemetry"
-    },
-    "tools/spdevice": {
-      "component": "spdevice",
-      "release-type": "go"
-    },
-    "tools/spmon": {
-      "component": "spmon",
-      "release-type": "go"
     }
   }
 }
